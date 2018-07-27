@@ -1,9 +1,10 @@
 <template>
   <div id="MyHeader">
      <div class="reader-icon" @click="loginPage">
-       <svg class="icon wode-icon" aria-hidden="true">
+       <svg class="icon wode-icon" aria-hidden="true" v-show="!userOk">
         <use xlink:href="#icon-wode"></use>
        </svg>
+       <p v-show="userOk" class="icon-p">{{userName}}</p>
      </div>
      <div class="change" ref='all'>
           <!-- jingxuan -->
@@ -22,6 +23,7 @@
 </template>
 <script>
 import icon from '../../assets/fonts/iconfont.js'
+import Cookie from '../../global/cookie'
 export default {
   name:'MyHeader',
   props:{
@@ -29,13 +31,19 @@ export default {
   },
   data(){
     return{
-      
+      userOk:'',
+      userName:''
     }
   },
   methods:{
     loginPage(){ //点击之后转跳登录注册页面
        this.$router.push({path:'/Login/Login'})
-    }
+    },
+  },
+  mounted(){
+     this.userName=Cookie.getCookie("userName");
+     this.userOk=Cookie.getCookie("userOk");
+     console.log("header:"+this.userName);
   }
 }
 </script>
@@ -102,6 +110,13 @@ export default {
    }
    .none{
      display: none
+   }
+   .icon-p{
+     height: 0.98rem;
+     width: 0.98rem;
+     padding: 0.02rem;
+     border-radius: 0.5rem;
+     line-height: 0.98rem;
    }
 </style>
 

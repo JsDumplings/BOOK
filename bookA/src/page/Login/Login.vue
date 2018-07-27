@@ -11,7 +11,7 @@
 </template>
 <script>
 import {login} from '../../api/api'
-//import jq from 'jquery'
+import Cookie from '../../global/cookie'
 export default {
     data(){
         return{
@@ -19,7 +19,9 @@ export default {
             fullWidth:document.documentElement.clientWidth,
             timer:false,
             name:'',
-            pwd:''
+            Ok:'',
+            pwd:'',
+            userName:''
         }
     },
     mounted(){
@@ -69,22 +71,24 @@ export default {
                 name:  _this.name,
                 pwd:  _this.pwd
             };
-
             //console.log(paramData)
             //交互
             login(paramData).then((res)=>{
-                console.log(res.data.name,res.data.userOk);
-                if(res.data.userOk)  _this.$router.push({path:'/Home/JingXuan'}) //如果登录成功则转跳主页
+                Cookie.setCookie("userName",_this.name);
+                Cookie.setCookie("userOk",res.data.userOk);
+                if(res.data.userOk){
+                    _this.$router.push({path:'/Home/JingXuan'}) //如果登录成功则转跳主页
+                } 
                 else{
                     alert("登录失败！");
                 }
             })
         },
         reset(){
-            this.name='';
-            this.pwd='';
+            this.name="";
+            this.pwd=""
         }
-  }
+  },
 }
 </script>
 

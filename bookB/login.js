@@ -25,17 +25,17 @@ app.post("/login", (req,res)=>{  //获取前台传过来的登录数据
 	//response=JSON.stringify(response);    //转换格式
 	const connection=mysql.createConnection({  //连接mysql数据库
 		host:'localhost',
-		port:'3001',
+		port:'3306',
 		user:'root',
-		password:'',
+		password:'12345',
 		database:'book'
 	});
 	var userOk=false;  //登录成功的状态判定
 	connection.connect();
-	connection.query("SELECT * FROM login",(error,results,fields)=>{  //查找数据库中的值
+	connection.query("SELECT * FROM users_table",(error,results,fields)=>{  //查找数据库中的值
 		if(error) throw error;
 		for(let i in results){       //将用户名、密码和数据库中的比较
-			if(response.name===results[i].name && response.pwd==results[i].pwd){
+			if(response.name===results[i].user_name && response.pwd==results[i].user_password){
 				userOk=true; break;
 			}else{
 				userOk=false;
