@@ -1,9 +1,7 @@
-var express=require('express')
-var app=express();
-var login=require('./login.js')
 
-exports.kuayu=function(){
-	app.all('*', function (req, res, next) {
+const kuayu=function(app){
+	let bodyParser=require('body-parser');
+	app.all('*', function (req, res, next) { //跨域
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
 		res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
@@ -11,7 +9,8 @@ exports.kuayu=function(){
 		if (req.method == "OPTIONS") res.sendStatus(200); /*让options请求快速返回*/
 		else next();
 	});
+	app.use(bodyParser.urlencoded( {extended: false}));
+	app.use(bodyParser.json());
+	console.log("kuayu已执行");
 }
-var server=app.listen(3000,'127.0.0.1',()=>{
-	console.log("端口3000运行");
-})
+module.exports=kuayu;

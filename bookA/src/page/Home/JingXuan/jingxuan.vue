@@ -15,5 +15,8 @@ export default {
         MyLunbo,
         JingxuanSection
     },
+    mounted(){
+        
+    }
 }
 </script>

@@ -53,7 +53,7 @@ import icon from '../../assets/fonts/iconfont.js'
     width: 2em; height: 2em;
     vertical-align: -1em;
     fill: currentColor;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 .active{
   text-decoration: none;

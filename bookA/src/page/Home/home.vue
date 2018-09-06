@@ -38,7 +38,7 @@ export default {
 <style scoped>
 *{padding: 0;margin: 0}
 #home{
-  background-color:#C0C0C0
+  background-color:#C0C0C0;
 }
 </style>
 

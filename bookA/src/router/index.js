@@ -7,6 +7,7 @@ import Kind from '@/page/Home/Kind/kind'
 import JingXuan from '@/page/Home/JingXuan/jingxuan'
 import My from '@/page/Home/My/my'
 import Login from '@/page/Login/Login'
+import bookInfo from '@/page/bookInfo/bookInfo'
 
 Vue.use(Router)
 
@@ -46,6 +47,10 @@ export default new Router({
         name:'Login',        //登录页面
         path:'/Login/Login',
         component:Login
+      },{
+        name:'bookInfo',
+        path:'/bookInfo/bookInfo',
+        component:bookInfo
       }]
     }
   ]

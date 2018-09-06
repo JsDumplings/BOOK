@@ -1,20 +1,22 @@
+ function login(){
 var express=require('express');
-var bodyParser=require('body-parser');
 var app=express();
-var assert=require('assert').strict;
 var mysql=require('mysql');
-app.all('*', function (req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
-	res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-	res.header("X-Powered-By", ' 3.2.1')
-	if (req.method == "OPTIONS") res.sendStatus(200); /*让options请求快速返回*/
-	else next();
-});
-//var urlEncode = bodyParser.urlencoded( {extended: false} );
-app.use(bodyParser.urlencoded( {extended: false}));
-app.use(bodyParser.json());
+//var server =require('./server');
+// var bodyParser=require('body-parser');
 //登录
+// app.all('*', function (req, res, next) { //跨域
+// 	res.header("Access-Control-Allow-Origin", "*");
+// 	res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+// 	res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+// 	res.header("X-Powered-By", ' 3.2.1')
+// 	if (req.method == "OPTIONS") res.sendStatus(200); /*让options请求快速返回*/
+// 	else next();
+// });
+
+// app.use(bodyParser.urlencoded( {extended: false}));
+// app.use(bodyParser.json());
+
 var respons="";
 app.post("/login", (req,res)=>{  //获取前台传过来的登录数据
 	response = {
@@ -49,6 +51,7 @@ app.post("/login", (req,res)=>{  //获取前台传过来的登录数据
 		res.send(R);
 		res.end();
 	});
+	
 connection.end();
 });
 
@@ -56,6 +59,9 @@ app.get("/login",(req,res)=>{
 	res.writeHead(200, {"Content-Type": "application/json;charset=utf-8" });
 	res.end("000:"+response.name);
 })
-var server=app.listen(3000,'127.0.0.1',()=>{
-	console.log("端口3000运行");
-})
+
+// app.listen(3000,'127.0.0.1',()=>{ //运行地址端口
+// 	console.log("端口3000运行");
+// })
+ }
+module.exports=login;
